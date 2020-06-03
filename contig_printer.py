@@ -1,25 +1,24 @@
+import sys
 
-switch1=0
+# python 2
 
+switch=0
+# You need to update this keep list with your contigs of interest.
+keep = [">tig00032677"]
 
-keep = [">263881"]
-#contig_name = "".join(['>',sys.argv[1]])
-#keep = [contig_name]
-#keep = [contig_name,">252838",">200817",">153461",">209499",">233638",">253198",">233882",">153175",">200971",">251845"]
-#keep = ["".join([">",ID.strip()]) for ID in open("contigs_less_than_2MB.out2")]
-#print len(keep) 
-for line in open("aws_pseudohap.fa"):
+# input your fasta file after the python script: python print_contig.py genome.fa
+for line in open(sys.argv[1]):
 	i=line.strip().split()
 	if line[0]==">":
-		#c=line.strip()
 		c=line.strip().split()[0]
-		
                 if c in keep:
-			switch1=1
+			switch=1
+			#print(line.strip()) # Switch to this line if you are using python3
 			print line.strip()
 			continue
 		else:
-			switch1=0
+			switch=0
 			continue
-	if switch1:
+	if switch:
 		print line.strip()
+                #print(line.strip()) # Switch to this line if you are using python3
